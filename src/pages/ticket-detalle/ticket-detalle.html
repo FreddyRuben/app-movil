@@ -1,0 +1,108 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>NUMERO DE FOLIO: {{ ticket.folio }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-list-header class="sec1" style="margin-bottom: 0px;" >
+        <ion-grid>
+    
+<ion-row justify-content-start>
+    <ion-col col-4>
+     <ion-card>
+  <h2 class="fontPrimaria" style="    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;">STATUS:</h2>
+  </ion-card>
+    </ion-col>
+    <ion-col col-8>
+       <ion-card>
+      <p class="fontPrimaria" style="text-transform:uppercase; text-align: left;">{{ ticket.status }}</p>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+        </ion-list-header>
+
+  <ion-grid class="sec2" >
+    
+<ion-row justify-content-start>
+    <ion-col col-4>
+     <ion-card>
+  <h2 class="fontPrimaria" style="    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center; ">ASESOR:</h2>
+  </ion-card>
+    </ion-col>
+    <ion-col col-8>
+      <ion-card>
+      <p class="fontPrimaria" style="text-transform:uppercase; text-align: left;    "> {{ ticket.asesor }}</p></ion-card>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+   <ion-grid class="sec3">
+    
+<ion-row justify-content-start>
+    <ion-col col-12>
+     <ion-card>
+  <h2 class="fontPrimaria" style="    font-size: 30px;
+    text-transform: uppercase;
+    text-align: left;       border-bottom: 1px solid;">ASUNTO</h2>
+  </ion-card>
+    </ion-col>
+    <ion-col col-12>
+     <p class="fontPrimaria" style="text-align: justify;"> {{ ticket.asunto }}</p>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+<ion-grid class="sec4">
+    
+<ion-row justify-content-start>
+    <ion-col col-12>
+     <ion-card>
+  <h2 class="fontPrimaria" style="    font-size: 30px;
+    text-transform: uppercase;
+    text-align: left;        border-bottom: 1px solid;">DESCRIPCION</h2>
+  </ion-card>
+    </ion-col>
+    <ion-col col-12>
+      <p class="fontPrimaria" style="text-align: justify;padding:3px;">{{ ticket.descripcion }}</p>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+<ion-grid>
+    
+<ion-row justify-content-start>
+    <ion-col col-10>
+     <ion-card>
+  <h2 style="    font-size: 30px;
+    text-transform: uppercase;
+    text-align: left;    color: #000;    border-bottom: 1px solid;">COMENTARIOS</h2>
+  </ion-card>
+    </ion-col>
+    <ion-col col-1>
+  <ion-icon style="font-size: 3em;" ios="ios-attach" md="md-add"  (click)="nuevoComentario()"></ion-icon>
+    </ion-col>
+    <ion-col col-12>
+      <button ion-item *ngFor="let comentario of ticket.comentarios" >
+          {{ comentario.index}} : {{ comentario.respuesta }}
+        </button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+        
+      </ion-list>
+
+</ion-content>

@@ -1,0 +1,44 @@
+<!--
+  Generated template for the NuevaNotaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><img src="assets/imgs/icon.png" width="20%"/> NUEVA NOTA</ion-title>
+    <ion-buttons end ><button ion-button (click)="closeNotaNueva()">Close</button></ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form ng-submit="comentarioSubmit()">
+  	<div class="list" style="    padding: 13px;">
+  
+
+      <img [src]="base64Image">
+        
+ <ion-select   placeholder="Tipo"  name="tipo">
+    <ion-option value="tipo 1          ">tipo 1</ion-option>
+    <ion-option value="tipo 2       ">tipo 2</ion-option>
+    <ion-option value="tipo 3       ">tipo 3</ion-option>
+  
+  </ion-select>
+   
+        
+        <ion-input  class="Ts" placeholder="Nombre" type="text" name="nombre"></ion-input>
+     
+       
+         <ion-textarea class="Ts" placeholder="Nota"></ion-textarea></div> <div padding>
+         		<button ion-button color="danger" icon-right block (click)="takePicture();">
+        Tomar Foto
+        <ion-icon name="camera">
+        
+        </ion-icon>
+      </button>
+           <button ion-button block (click) = "comentarioSubmit()">Enviar</button></div>
+  </form>
+</ion-content>

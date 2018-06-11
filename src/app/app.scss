@@ -1,0 +1,56 @@
+.toolbar-background-md {
+  
+    background: #5ab2f2;
+    
+}
+
+.button-md {
+    background-color: #204c6f !important;
+
+    margin: auto ;
+    width: 95%;
+    display: block;
+    margin-bottom: 7px;
+}
+ion-app.md [padding] .scroll-content {
+    padding: 0px;
+}
+ion-app.md [padding] {
+    padding: 0px;
+}
+.toolbar-title-md {
+   
+    color: #ffffff;
+}
+// 
+.toolbar-title-md {
+    color: #ffffff;
+    display: flex !important;
+    
+    align-items: center !important;
+    height: 100%;
+}
+//seccion tickets
+.item-md{padding-left: 0px;}
+.label-md {
+    margin: 13px 0px 13px 0;
+}
+
+ 
+.item-md.item-block .item-inner {
+  padding-right: 0px !important;
+  border-bottom: 1px solid #dedede;
+}
+//secciones
+.sec1{background-color:#50a0d2;    box-shadow: inset -3px 6px 16px 0.5px;
+}
+.sec2{background-color: #4875ab;}
+.sec3{background-color: #1f4e88;}
+.sec4{background-color: #11325a;}
+
+.gradient{background: #1e3147;
+    background: -webkit-linear-gradient(to bottom, #1e3147, #1e3c72);
+    background: linear-gradient(to bottom, #1e3147, #1e3c72);}
+
+ //texto
+ .fontPrimaria{color:#fff !important;}   

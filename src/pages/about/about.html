@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+   <img src="assets/imgs/icon.png" width="20%"/>   REPORTES
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+	<div class="sec2">
+    <h3 class="fontPrimaria" style="margin:0px;padding:20px;">Reportes de Avance del Proyecto</h3></div>
+     <div style="display: block;padding:20px;">
+      <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)" style="margin-bottom:20px;"></canvas>
+        <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+   
+ 
+    <button ion-button (click)="randomize()" style="margin-top:20px;">Update</button>
+      </div>
+</ion-content>

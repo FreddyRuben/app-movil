@@ -1,0 +1,24 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class="fontPrimaria" style="text-transform: uppercase;">{{ item.title }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  
+        
+          <div class="sec2"><p class="fontPrimaria" style="padding:20px;margin: 0px;"> Lista de Tareas</p></div>
+    <div style="padding: 5%;">
+        <ion-list *ngFor="let item of item.detail" style="position:relative;">
+           <button ion-item (click)="TaskSelected(item)">
+          {{ item.task }} 
+        </button>
+       
+        </ion-list>
+      
+   </div>
+</ion-content>
