@@ -7,26 +7,36 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <div class="sec2"><p class="fontPrimaria" style="padding:20px;margin: 0px;"> No hay tickets abiertos actualmente</p></div>
- <div class="sec2"><p class="fontPrimaria" style="padding:20px;margin: 0px;">
-  Tienes cuatro tickets en seguimiento actualmente</p></div>
+    
+ 
   <ion-list>
+
+      <ion-item *ngIf="tickets.length == 0"> 
+      <div class="sec2">
+       <p class="fontPrimaria" style="padding:20px;margin: 0px;">
+       No hay tickets abiertos actualmente</p></div>
+     </ion-item>
+      <ion-item *ngIf="tickets.length > 0"> 
+      <div class="sec2">
+       <p class="fontPrimaria" style="padding:20px;margin: 0px;">
+       Tienes {{tickets.length}} tickets en seguimiento actualmente</p></div>
+     </ion-item>
      <div class="row header item-md">
-          <div class="col col-4  ticketTaG" style="color:#fff;">FOLIO</div>
+          <div class="col col-4  ticketTaG" style="color:#fff;">FECHA</div>
          
           <div class="col col-4  ticketTaG" style="color:#fff;">STATUS</div>
-          <div class="col col-4  ticketTaG" style="color:#fff;">ASESOR</div>
+          <div class="col col-4  ticketTaG" style="color:#fff;">PRIORIDAD</div>
          
         </div>
 
           <button ion-item *ngFor="let ticket of tickets"  (click)="ticketSelected(ticket)">
             <div class="row">
-          <div class="col col-4  ticketTaG">{{ ticket.folio}}</div>
+          <div class="col col-4  ticketTaG">{{ ticket.created_at}}</div>
           
           <div class="col col-4  ticketTa">{{ ticket.status}}</div>
-          <div class="col col-4  ticketTa">{{ ticket.asesor}}</div></div>
+          <div class="col col-4  ticketTa">{{ ticket.priority}}</div></div>
           <div class="row">
-          <div class="col col-12  ticketTa">  <span style=" font-weight:800;color:#000;">Asunto:</span> {{ ticket.asunto}}</div>
+          <div class="col col-12  ticketTa">  <span style=" font-weight:800;color:#000;">Asunto:</span> {{ ticket.subject}}</div>
           </div>
       </button>  </ion-list>
 </ion-content>

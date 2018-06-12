@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts';
-
+import { SQLite } from '@ionic-native/sqlite';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,23 +32,13 @@ import { TicketDetallePage } from '../pages/ticket-detalle/ticket-detalle';
 import { TicketComentarioPage } from '../pages/ticket-comentario/ticket-comentario';
 import { NuevaNotaPage } from '../pages/nueva-nota/nueva-nota';
 
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireModule } from 'angularfire2';
-import { Observable } from 'rxjs';
+
 
 import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
-import { FirebaseProvider } from '../providers/firebase/firebase';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDx0qie9baQD4HCFmLFmNQ00n0YZj8FQWc",
-    authDomain: "project-1906316041004057979.firebaseapp.com",
-    databaseURL: "https://project-1906316041004057979.firebaseio.com",
-    projectId: "project-1906316041004057979",
-    storageBucket: "",
-    messagingSenderId: "685860175476"
-  };
+import { SqliteProvider } from '../providers/sqlite/sqlite';
+
 
 @NgModule({
   declarations: [
@@ -75,9 +65,8 @@ const firebaseConfig = {
     BrowserModule,
      HttpModule,
      ChartsModule,
-     AngularFireDatabaseModule,
-     AngularFireModule.initializeApp(firebaseConfig),
-     
+    
+    
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -104,11 +93,13 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     Camera,
+    SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectService,
      
     Geolocation,
-    FirebaseProvider
+    
+    SqliteProvider
   ]
 })
 export class AppModule {}

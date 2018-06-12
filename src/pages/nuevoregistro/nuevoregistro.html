@@ -16,4 +16,21 @@
 
 <ion-content padding>
 <div class="sec2"><ion-datetime displayFormat="MMM DD, YYYY HH:mm"  [(ngModel)]="myDate" style="color:#fff;"></ion-datetime ></div>
+
+ <ion-card>
+    <ion-card-content>
+      <button ion-button color="danger" icon-right block (click)="takePicture();">
+        Tomar Foto
+        <ion-icon name="camera">
+        
+        </ion-icon>
+      </button>
+
+      <img [src]="base64Image">
+
+    </ion-card-content>
+  </ion-card>
+  <button ion-item *ngFor="let item of Position" >
+    {{ item }}
+  </button>
 </ion-content>

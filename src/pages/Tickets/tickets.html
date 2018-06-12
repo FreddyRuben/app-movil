@@ -10,7 +10,7 @@
     
   <ion-title ><img src="assets/imgs/icon.png" width="20%"/> TICKET</ion-title>
   </ion-navbar>
-
+  
 </ion-header>
 
 
@@ -36,20 +36,29 @@
  <form (ngSubmit)="ticketSubmit()" style="padding:10px;">
   <div class="list">
 <ion-item>
- <ion-select   placeholder="Tipo                " [(ngModel)]="ticket.tipo" name="tipo">
+  
+  <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="ticket.created_at" name="created_at" style="color:#000;"></ion-datetime>
+</ion-item>
+<ion-item>
+ <ion-select   placeholder="Tipo                " [(ngModel)]="ticket.type_id" name="type_id">
     <ion-option value="tipo 1          ">tipo 1</ion-option>
     <ion-option value="tipo 2       ">tipo 2</ion-option>
     <ion-option value="tipo 3       ">tipo 3</ion-option>
   
   </ion-select>
     </ion-item>
-      <ion-item>
-        
-        <ion-input  class="Ts" placeholder="Asunto" type="text" [(ngModel)]="ticket.asunto" name="asunto"></ion-input>
-      </ion-item>
+
+  <ion-item>
+ <ion-select   placeholder="prioridad                " [(ngModel)]="ticket.priority" name="priority">
+    <ion-option value="alta         ">Alta</ion-option>
+    <ion-option value="media      ">Media</ion-option>
+    <ion-option value="baja      ">Baja</ion-option>
+  
+  </ion-select>
+    </ion-item>
       <ion-item>
      
-        <ion-textarea  class="Ts"  placeholder="Descripcion" [(ngModel)]="ticket.descripcion" name="descripcion"></ion-textarea>
+        <ion-textarea  class="Ts"  placeholder="Descripcion" [(ngModel)]="ticket.subject" name="subject"></ion-textarea>
       </ion-item>
       <button ion-button type="submit" block class="Ts">Crear Ticket</button>   </div>
     </form>
@@ -61,3 +70,4 @@
   
 
 </ion-content>
+
