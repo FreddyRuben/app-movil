@@ -9,6 +9,8 @@
 <ion-content padding>
     
  
+   
+
   <ion-list>
 
       <ion-item *ngIf="tickets.length == 0"> 
@@ -29,7 +31,7 @@
          
         </div>
 
-          <button ion-item *ngFor="let ticket of tickets"  (click)="ticketSelected(ticket)">
+          <button ion-item *ngFor="let ticket of tickets "  (click)="ticketSelected(ticket)" >
             <div class="row">
           <div class="col col-4  ticketTaG">{{ ticket.created_at}}</div>
           
@@ -39,4 +41,6 @@
           <div class="col col-12  ticketTa">  <span style=" font-weight:800;color:#000;">Asunto:</span> {{ ticket.subject}}</div>
           </div>
       </button>  </ion-list>
+     
+ 
 </ion-content>

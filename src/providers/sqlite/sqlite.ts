@@ -22,7 +22,7 @@ private dbReady = new BehaviorSubject<boolean>(false);
   constructor(private platform:Platform, private sqlite:SQLite) {
     this.platform.ready().then(()=>{
       this.sqlite.create({
-        name: 'todos.db',
+        name: 'local.db',
         location: 'default'
       })
       .then((db:SQLiteObject)=>{
@@ -65,6 +65,7 @@ private dbReady = new BehaviorSubject<boolean>(false);
  
 //funciones CRUD 
  createTable(){
+  console.log("creating ticket table if it does not exist");
  // let sql = 'DROP TABLE tickets';
   //let sql = 'CREATE TABLE IF NOT EXISTS tickets(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, completed INTEGER)';
   let sql = 'CREATE TABLE IF NOT EXISTS tickets(id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, subject TEXT, status ENUM, priority ENUM, agent_id INTEGER, channel_id INTEGER, type_id INTEGER, created_at TIMESTAMP, updated_at TIMESTAMP, deleted_at TIMESTAMP)';
@@ -87,8 +88,9 @@ getAll(){
 }
 
 create(ticket: any){
-  let sql = 'INSERT INTO tickets( user_id , subject, status, priority,  type_id, created_at ) VALUES( ?, ?, ?, ?, ?, ?)';
-  return this.database.executeSql(sql, ['00001', ticket.subject,'pendiente', ticket.priority, ticket.type_id, ticket.created_at ]);
+  console.log(ticket);
+  let sql = 'INSERT INTO tickets( subject, status, priority,  type_id, created_at ) VALUES(  ?, ?, ?, ?, ?)';
+  return this.database.executeSql(sql, [ ticket.subject,'pendiente', ticket.priority, ticket.type_id, ticket.created_at ]);
 }
 
 

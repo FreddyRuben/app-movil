@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { TicketsPage } from '../Tickets/tickets';
 import { TicketDetallePage } from '../ticket-detalle/ticket-detalle';
 import { SqliteProvider } from './../../providers/sqlite/sqlite';
@@ -15,7 +16,7 @@ export class ContactPage {
 
 tickets = [];
 
-  constructor(public navCtrl: NavController, public http: Http, public sqliteService: SqliteProvider) {
+  constructor(  public navCtrl: NavController, public http: Http, public sqliteService: SqliteProvider) {
    
  // let url = "https://project-1906316041004057979.firebaseio.com/ticketsTable/tickets-id.json";
   //this.http.get(url).subscribe(data => {
@@ -23,8 +24,29 @@ tickets = [];
  
    // console.log(data.json());
     //});
+    
+
+
+  
+setInterval(() => {
+  this.getAllTickets(); 
+}, 3000 );
+    
+  
+  
   }
+
+  
 /*
+ doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
   deleteTask(task: any, index){
     this.tasksService.delete(task)
     .then(response => {
@@ -46,6 +68,10 @@ tickets = [];
       console.error( error );
     });
   }
+
+ 
+ 
+
 
 /*
   updateTask(task, index){

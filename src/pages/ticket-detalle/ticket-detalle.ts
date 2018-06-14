@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { TicketComentarioPage } from '../ticket-comentario/ticket-comentario';
+import { SqliteProvider } from './../../providers/sqlite/sqlite';
 /**
  * Generated class for the TicketDetallePage page.
  *
@@ -18,9 +19,16 @@ export class TicketDetallePage {
 
 ticket;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public sqliteService: SqliteProvider) {
 
   this.ticket = navParams.data.ticket;
+  }
+
+
+ deleteTicket(ticket) {
+  
+    console.log(this.ticket);
+  this.sqliteService.delete(this.ticket);
   }
 
  nuevoComentario() {
