@@ -15,7 +15,7 @@ import { Http} from '@angular/http';
 export class ContactPage {
 
 tickets = [];
-
+ticketsPending = [];
   constructor(  public navCtrl: NavController, public http: Http, public sqliteService: SqliteProvider) {
    
  // let url = "https://project-1906316041004057979.firebaseio.com/ticketsTable/tickets-id.json";
@@ -67,6 +67,17 @@ setInterval(() => {
     .catch( error => {
       console.error( error );
     });
+   
+   this.sqliteService.getAll2()
+    .then(ticketsPending => {
+      console.log(ticketsPending);
+      this.ticketsPending = ticketsPending;
+    })
+    .catch( error => {
+      console.error( error );
+    });
+
+
   }
 
  

@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts';
 import { SQLite } from '@ionic-native/sqlite';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -94,6 +95,7 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
     SplashScreen,
     Camera,
     SQLite,
+    SQLitePorter,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectService,
      

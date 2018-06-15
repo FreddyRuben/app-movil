@@ -40,7 +40,24 @@
           <div class="row">
           <div class="col col-12  ticketTa">  <span style=" font-weight:800;color:#000;">Asunto:</span> {{ ticket.subject}}</div>
           </div>
-      </button>  </ion-list>
+      </button> 
+
+  <ion-item *ngIf="ticketsPending.length > 0"> 
+      <div class="secPending">
+       <p class="fontPrimaria" style="padding:20px;margin: 0px;">
+       Tienes {{ticketsPending.length}} tickets pendientes por sincronizar</p></div>
+     </ion-item>
+       <button ion-item *ngFor="let ticketP of ticketsPending "  (click)="ticketSelected(ticket)" >
+            <div class="row">
+          <div class="col col-4  ticketTaG">{{ ticketP.created_at}}</div>
+          
+          <div class="col col-4  ticketTa">{{ ticketP.status}}</div>
+          <div class="col col-4  ticketTa">{{ ticketP.priority}}</div></div>
+          <div class="row">
+          <div class="col col-12  ticketTa">  <span style=" font-weight:800;color:#000;">Asunto:</span> {{ ticketP.subject}}</div>
+          </div>
+      </button> 
+       </ion-list>
      
  
 </ion-content>

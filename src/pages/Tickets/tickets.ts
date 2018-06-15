@@ -19,6 +19,9 @@ import { SqliteProvider } from './../../providers/sqlite/sqlite';
 })
 export class TicketsPage {
  
+
+
+
  //ticket = { asunto: "", descripcion:"" ,asesor:"pendiente", comentarios:"null", folio:"", status:"pendiente"};
  ticket = []; 
  //ticket= {};
