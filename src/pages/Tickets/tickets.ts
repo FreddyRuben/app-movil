@@ -25,21 +25,31 @@ export class TicketsPage {
  //ticket = { asunto: "", descripcion:"" ,asesor:"pendiente", comentarios:"null", folio:"", status:"pendiente"};
  ticket = []; 
  //ticket= {};
+myDate: String = new Date().toISOString();
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public sqliteService: SqliteProvider) {
- 
-  }
+
+   //this.projectTask = navParams.data.item;
+
+   
+
+    }
+  
+  
 
 
 
 
  ticketSubmit(ticket) {
+  this.ticket['created_at'] = this.myDate;
+  this.ticket['project_id'] = this.navParams.data.item.project_id;
+   this.ticket['task_id'] = this.navParams.data.item.id;
   
-    console.log(this.ticket);
-  this.sqliteService.create(this.ticket);
+  console.log(this.ticket);
+ this.sqliteService.create(this.ticket);
   }
 
 

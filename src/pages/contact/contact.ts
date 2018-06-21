@@ -16,7 +16,17 @@ export class ContactPage {
 
 tickets = [];
 ticketsPending = [];
-  constructor(  public navCtrl: NavController, public http: Http, public sqliteService: SqliteProvider) {
+
+doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      this.getAllTickets(); 
+      refresher.complete();
+     }, 2000);
+  }
+
+constructor(  public navCtrl: NavController, public http: Http, public sqliteService: SqliteProvider) {
    
  // let url = "https://project-1906316041004057979.firebaseio.com/ticketsTable/tickets-id.json";
   //this.http.get(url).subscribe(data => {
@@ -24,17 +34,11 @@ ticketsPending = [];
  
    // console.log(data.json());
     //});
-    
 
 
-  
-setInterval(() => {
-  this.getAllTickets(); 
-}, 3000 );
+this.getAllTickets(); 
     
-  
-  
-  }
+}
 
   
 /*
@@ -58,17 +62,16 @@ setInterval(() => {
     })
   }
 */
-  getAllTickets(){
-    this.sqliteService.getAll()
+getAllTickets(){
+this.sqliteService.syncFULL()
+ this.sqliteService.getAll()
     .then(tickets => {
       console.log(tickets);
       this.tickets = tickets;
     })
-    .catch( error => {
-      console.error( error );
-    });
-   
-   this.sqliteService.getAll2()
+
+
+ this.sqliteService.getAll2()
     .then(ticketsPending => {
       console.log(ticketsPending);
       this.ticketsPending = ticketsPending;
@@ -77,9 +80,50 @@ setInterval(() => {
       console.error( error );
     });
 
-
   }
 
+//this.getInfo("tickets", "tickets");
+//this.getInfo("ticketsPending", "ticketsPending");
+/*
+ this.sqliteService.getTable("tickets","tickets").then(tickets => {
+      console.log(tickets);
+      this.tickets = tickets;
+    }).catch( error => {
+      console.error( error );
+    });
+
+ this.sqliteService.getTable("ticketsPending","ticketsPending").then(ticketsPending => {
+      console.log(ticketsPending);
+      this.ticketsPending = ticketsPending;
+    }).catch( error => {
+      console.error( error );
+    });*/
+
+
+
+
+/*
+
+getInfo(table,row){
+this.sqliteService.getTable(table,row).then(row => {
+console.log(row);
+this.row = row;
+}).catch( error => {
+      console.error( error );
+});
+}
+
+  */
+
+
+/*
+   
+    */
+   
+   
+
+
+  
  
  
 
@@ -104,6 +148,8 @@ setInterval(() => {
   }
 
  OpenTickets(){
-    this.navCtrl.push(TicketsPage);
+  let item = { "id": 0,"project_id": 0 };
+ console.log("Selected Item", item);
+    this.navCtrl.push(TicketsPage, { item: item });
   }
 }

@@ -8,13 +8,18 @@
 
   <ion-navbar>
     <ion-title><img src="assets/imgs/icon.png" width="20%"/> REGISTROS
-    	<ion-icon style="font-size: 2.0em;padding-left:30px;" ios="ios-attach" md="md-add"  (click)="NuevoRegistro()"></ion-icon></ion-title>
+    	<ion-icon style="font-size: 2.0em;padding-left:30px;" ios="ios-attach" md="md-add"  (click)="Open('N')"></ion-icon></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 <ion-list>
-  <button ion-item *ngFor="let registro of registros" (click)="registroSelected(registro)" style="    text-transform: uppercase;padding:10px;">
+   <ion-item *ngIf="registros.length == 0"> 
+      <div class="sec2">
+       <p class="fontPrimaria" style="padding:20px;margin: 0px;">
+       No hay registros  actualmente</p></div>
+ </ion-item>
+  <button ion-item *ngFor="let registro of registros" (click)="Open('D', registro)" style="    text-transform: uppercase;padding:10px;">
     {{ registro.nombre }}  :   {{ registro.date }}
   </button>  
 </ion-list>

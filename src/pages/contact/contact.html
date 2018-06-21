@@ -6,11 +6,17 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+
+
+    <ion-content padding>
     
  
-   
+<ion-refresher (ionRefresh)="doRefresh($event)">
+ <ion-refresher-content>
 
+ 
+    </ion-refresher-content>
+</ion-refresher>  
   <ion-list>
 
       <ion-item *ngIf="tickets.length == 0"> 
@@ -58,6 +64,7 @@
           </div>
       </button> 
        </ion-list>
-     
- 
 </ion-content>
+
+ 
+

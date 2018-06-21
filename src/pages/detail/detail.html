@@ -14,7 +14,7 @@
   <ion-list >
 
     <ion-item  class="sec2" >
-      <ion-label class="fontPrimaria" style="text-transform: uppercase;text-align:center;padding:5px;">{{ item.task }}</ion-label>
+      <ion-label  style="text-transform: uppercase;text-align:center;padding:5px;    color: #000 !important;">{{ item.heading }}</ion-label>
       <!--<ion-input type="text" value="{{ item.title }}"></ion-input>-->
     </ion-item>
     
@@ -29,7 +29,7 @@
       <ion-col col-12>
   <ion-label style="font-weight:bolder;font-size:20px;">Descripcion</ion-label>
         <p style="text-align:justify;">
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p></ion-col></ion-row></ion-grid>
+      {{ item.description }}<</p></ion-col></ion-row></ion-grid>
  <ion-label style="padding:10px;font-weight:bolder;font-size:20px;    margin: 0px;">Porcentaje de avance</ion-label>
    <ion-item style="padding:10px;">
 
@@ -39,22 +39,23 @@
     </ion-range>
   </ion-item>
  
-    <button ion-button icon-right (click)="OpenRegistro()">
+    <button ion-button icon-right (click)="Open('R')">
       REGISTRO
       <ion-icon name="calendar" ></ion-icon>
     </button>
 
-    <button ion-button icon-right (click)="OpenTickets()">
-        TICKETS
-        <ion-icon name="build"></ion-icon>
-      </button>
+   
 
-      <button ion-button icon-right (click)="OpenNotas()">
+      <button ion-button icon-right (click)="Open('N')">
           NOTAS
           <ion-icon name="clipboard"></ion-icon>
         </button>
 
-  
+
+   <button ion-button icon-right (click)="Open('T')">
+        TICKETS 
+        <ion-icon name="build"></ion-icon>
+      </button>
 
   <!--<div class="show-list-numbers-and-dots">
       <p style="color:#000000;font-size:19px;">

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DetailPage } from '../detail/detail';
-
+import { Http, Headers} from '@angular/http';
 /**
  * Generated class for the TaskPage page.
  *
@@ -17,10 +17,17 @@ import { DetailPage } from '../detail/detail';
 export class TaskPage {
 
   item;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+ ProjectId;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     
-    this.item = navParams.data.item;
+  this.ProjectId = navParams.data.item;
+  let url = "http://10.10.1.108:81/apiservice/public/api/v1/projects/" + this.ProjectId.id + "/tasks";
+  this.http.get(url).subscribe(data => {
+  this.item = data.json();
+ 
+  console.log(data.json());
+    });
+  
   
   }
 
@@ -31,7 +38,7 @@ export class TaskPage {
   TaskSelected(item) {
     //console.log("Selected Item", item);
 
-    if (item.detail.length > 0)  {
+    if (item.length > 0)  {
       this.navCtrl.push(TaskPage, { item: item });
     } else {
       this.navCtrl.push(DetailPage, { item: item });

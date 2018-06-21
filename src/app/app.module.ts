@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts';
 import { SQLite } from '@ionic-native/sqlite';
 import { SQLitePorter } from '@ionic-native/sqlite-porter';
-
+import { Network } from '@ionic-native/network';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,6 +31,7 @@ import { NuevoregistroPage } from '../pages/nuevoregistro/nuevoregistro';
 import { NotasPage } from '../pages/notas/notas';
 import { TicketDetallePage } from '../pages/ticket-detalle/ticket-detalle';
 import { TicketComentarioPage } from '../pages/ticket-comentario/ticket-comentario';
+import { TicketsPorTareaPage } from '../pages/tickets-por-tarea/tickets-por-tarea';
 import { NuevaNotaPage } from '../pages/nueva-nota/nueva-nota';
 
 
@@ -56,7 +57,8 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
       RegistroPage,
     TicketsPage,
     TicketDetallePage,
-     RegistroDetallePage ,
+    TicketsPorTareaPage,
+    RegistroDetallePage ,
      NuevaNotaPage,
      NuevoregistroPage,
     TicketComentarioPage
@@ -66,8 +68,6 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
     BrowserModule,
      HttpModule,
      ChartsModule,
-    
-    
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -85,6 +85,7 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
     RegistroPage,
     TicketsPage,
     TicketDetallePage,
+    TicketsPorTareaPage,
      RegistroDetallePage ,
      NuevaNotaPage,
      NuevoregistroPage,
@@ -94,6 +95,7 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
     StatusBar,
     SplashScreen,
     Camera,
+    Network,
     SQLite,
     SQLitePorter,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

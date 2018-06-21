@@ -26,11 +26,32 @@
         </ion-icon>
       </button>
 
-      <img [src]="base64Image">
+      
 
     </ion-card-content>
   </ion-card>
-  <button ion-item *ngFor="let item of Position" >
-    {{ item }}
-  </button>
+  
+
+<form (ngSubmit)="registroSubmit()" style="padding:10px;">
+ 
+ 
+<ion-item>
+  <ion-slides>
+   <ion-slide *ngFor="let image of base64Image" (ionSlideDidChange)="slideChanged()">
+    
+   <img [src]="image">
+  </ion-slide>
+  
+</ion-slides>
+  
+</ion-item>
+
+
+ <div class="list">
+<ion-item>
+<ion-textarea  class="Ts"  placeholder="Descripcion" [(ngModel)]="registro.description" name="description"></ion-textarea>
+ </ion-item>
+<button ion-button type="submit" block class="Ts">Crear Registro</button>   </div>
+</form>
+
 </ion-content>
