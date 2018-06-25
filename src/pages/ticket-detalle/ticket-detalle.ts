@@ -25,11 +25,7 @@ ticket;
   }
 
 
- deleteTicket(ticket) {
-  
-    console.log(this.ticket);
-  this.sqliteService.delete(this.ticket);
-  }
+ 
 
  nuevoComentario() {
     const modal = this.modalCtrl.create(TicketComentarioPage);

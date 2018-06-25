@@ -48,7 +48,7 @@ myDate: String = new Date().toISOString();
   this.ticket['project_id'] = this.navParams.data.item.project_id;
    this.ticket['task_id'] = this.navParams.data.item.id;
   
-  console.log(this.ticket);
+ 
  this.sqliteService.create(this.ticket);
   }
 

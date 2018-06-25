@@ -7,14 +7,40 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ registro.date }}</ion-title>
+  <ion-title> FECHA: {{ registro.created_at }}  </ion-title>
+  
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-	<div class="sec2"><p style="color:#fff; padding:10px;margin:0px;">{{ registro.nombre }}</p></div>
+	<div class="sec2">
+<ion-item>
+  <ion-slides>
+   <ion-slide *ngFor="let image of registro.images" (ionSlideDidChange)="slideChanged()">
+    
+   <img [src]="image.image">
+  </ion-slide>
+  
+</ion-slides>
+  
+</ion-item>
+</div>
 
+ <ion-grid class="sec3">
+    
+<ion-row justify-content-start>
+    <ion-col col-12>
+     <ion-card>
+  <h2 class="fontPrimaria" style="    font-size: 30px;
+    text-transform: uppercase;
+    text-align: left;       border-bottom: 1px solid;">DESCRIPCION</h2>
+  </ion-card>
+    </ion-col>
+    <ion-col col-12>
+     <p class="fontPrimaria" style="text-align: justify;"> {{ registro.description}}</p>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
 
 </ion-content>

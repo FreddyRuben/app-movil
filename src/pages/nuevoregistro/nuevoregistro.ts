@@ -18,22 +18,24 @@ import { Slides } from 'ionic-angular';
   templateUrl: 'nuevoregistro.html',
 })
 export class NuevoregistroPage {
+item;
 Image = [];
 base64Image =[];
 Position = [];
-registro = [];
-latitude = [];
-longitude= [];
+registro = {};
+latitude:string ;
+longitude:string ;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private geolocation: Geolocation, public sqliteService: SqliteProvider) {
+ this.item = navParams.data.item;
   }
 
 myDate: String = new Date().toISOString();
 
  takePicture(){
 
-  this.geolocationNative();
-
+  //this.geolocationNative();
+ this.geolocation.getCurrentPosition().then((geoposition: Geoposition) => {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -48,25 +50,26 @@ myDate: String = new Date().toISOString();
      // If it's base64:
      
      this.base64Image.push('data:image/jpeg;base64,' + imageData)
-     this.Image.push(imageData)
+    this.Image.push({image:'data:image/jpeg;base64,'+imageData,latitude:geoposition.coords.latitude.toString(),longitude:geoposition.coords.longitude.toString()})
+    // this.Image.push(imageData)
      
     }, (err) => {
      // Handle error
     });
 
-  
+   }) 
   }
 
-  geolocationNative(){
+  /*geolocationNative(){
     this.geolocation.getCurrentPosition().then((geoposition: Geoposition) => {
-      this.Position[0] = geoposition.coords.longitude.toString();
-      this.Position[1] = geoposition.coords.latitude.toString();
-      this.longitude.push(geoposition.coords.longitude.toString())
-     this.latitude.push(geoposition.coords.latitude.toString())
+      this.longitude = geoposition.coords.longitude.toString();
+      this.latitude = geoposition.coords.latitude.toString();
+      //this.longitude.push(geoposition.coords.longitude.toString())
+     //this.latitude.push(geoposition.coords.latitude.toString())
       //console.log(geoposition);
     }) 
   }
-
+*/
   @ViewChild(Slides) slides: Slides;
 
   goToSlide() {
@@ -79,17 +82,29 @@ myDate: String = new Date().toISOString();
   }
 
   registroSubmit(registro) {
-  this.registro ['created_at'] = this.myDate
-  this.registro['project_id'] = this.navParams.data.item.project_id;
+  this.registro['created_at'] = this.myDate;
   this.registro['task_id'] = this.navParams.data.item.id;
-  this.registro['latitude'] = this.latitude;
-  this.registro['longitude'] = this.longitude;
   this.registro['images'] = this.Image;
-  console.log(this.registro);
-  //this.sqliteService.createRegistro(this.registro);
+  console.log( this.registro);
+  let test2= [];
+  test2.push(this.registro)
+  console.log (test2[0]);
+  this.sqliteService.createRegistro( this.registro, this.navParams.data.item.id);
   }
 
+/*
+ ticketSubmit(ticket) {
+  this.ticket['created_at'] = this.myDate;
+  this.ticket['project_id'] = this.navParams.data.item.project_id;
+   this.ticket['task_id'] = this.navParams.data.item.id;
+  
+ 
+ this.sqliteService.create(this.ticket);
+  }
+*/
+
   ionViewDidLoad() {
+   
     console.log('ionViewDidLoad NuevoregistroPage');
   }
 

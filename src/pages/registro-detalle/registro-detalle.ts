@@ -18,6 +18,7 @@ export class RegistroDetallePage {
  registro;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	 this.registro = navParams.data.registro;
+  	 
   }
 
   ionViewDidLoad() {

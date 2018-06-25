@@ -20,7 +20,7 @@
        No hay registros  actualmente</p></div>
  </ion-item>
   <button ion-item *ngFor="let registro of registros" (click)="Open('D', registro)" style="    text-transform: uppercase;padding:10px;">
-    {{ registro.nombre }}  :   {{ registro.date }}
+    <div style="display:inline-block;"><div style="float:left;width:20%;"><img [src]="registro.images[0].image" ></div><div style="float:left;width:70%;"><p style="width:100%;">{{ registro.created_at }}  :   {{ registro.description }} </p></div>  </div>
   </button>  
 </ion-list>
 </ion-content>

@@ -33,7 +33,7 @@
  <ion-label style="padding:10px;font-weight:bolder;font-size:20px;    margin: 0px;">Porcentaje de avance</ion-label>
    <ion-item style="padding:10px;">
 
-    <ion-range min="0" max="100"  color="secondary" pin="true">
+    <ion-range min="0" max="100"  color="secondary" pin="true" [(ngModel)]="item.percentage">
       <ion-label range-left>0</ion-label>
       <ion-label range-right>100</ion-label>
     </ion-range>

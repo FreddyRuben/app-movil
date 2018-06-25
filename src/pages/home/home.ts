@@ -29,13 +29,13 @@ doRefresh(refresher) {
   }
 
 getProjects(){
-   let url = "http://10.10.1.108:81/apiservice/public/api/v1/projects";
+   let url = "http://10.10.1.136:81/apiservice/public/api/v1/projects";
   this.http.get(url).subscribe(data => {
  this.items = data.json();
  
-    console.log(data.json());
+    console.log( "test"  + data.json());
     });
-    console.log(this.projectService.getProjects());
+    
 }
   itemSelected(item: string) {
    //console.log("Selected Item", item);

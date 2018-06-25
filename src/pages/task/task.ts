@@ -21,7 +21,7 @@ export class TaskPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     
   this.ProjectId = navParams.data.item;
-  let url = "http://10.10.1.108:81/apiservice/public/api/v1/projects/" + this.ProjectId.id + "/tasks";
+  let url = "http://10.10.1.136:81/apiservice/public/api/v1/projects/" + this.ProjectId.id + "/tasks";
   this.http.get(url).subscribe(data => {
   this.item = data.json();
  

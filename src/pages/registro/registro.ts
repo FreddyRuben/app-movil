@@ -21,24 +21,29 @@ registros = [];
 
   constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams) {
 this.item = navParams.data.item;
-let url = "http://10.10.1.108:81/apiservice/public/api/v1/tasks/" + this.item.id + /registros/;
+let url = "http://10.10.1.136:81/apiservice/public/api/v1/tasks/" + this.item.id + /registros/;
+//let url2 = "http://10.10.1.108:81/apiservice/public/api/v1/registros/" + this.item.id + /imagenes/;
   this.http.get(url).subscribe(data => {
    this.registros = data.json();
  
    console.log(data.json());
     });
-
+/*this.http.get(url2).subscribe(data => {
+   this.Imagenes = data.json();
+ 
+   console.log(data.json());
+    });*/
   }
 
 
-Open(page: string , registro: string){
+Open(page: string , registro: string, ){
     let item = this.navParams.data.item;
     console.log("Selected Item", item);
     console.log(page);
 
     switch(page) { 
     case "D": { 
-      this.navCtrl.push(RegistroDetallePage, { registro: registro, item: item});
+      this.navCtrl.push(RegistroDetallePage, {  registro: registro, item: item});
       break; 
               } 
     case "N": { 

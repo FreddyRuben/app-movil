@@ -56,7 +56,7 @@ this.sqlite.create({ name: 'local.db', location: 'default'})
         });*/
 
       })
-let url = "http://10.10.1.108:81/apiservice/public/api/v1/tickets";
+let url = "http://10.10.1.136:81/apiservice/public/api/v1/tickets";
 let headers2 = new Headers();
 headers2.append('Accept','application/json');
 headers2.append('content-type','application/json');
@@ -162,12 +162,13 @@ getAll2(){
 create(ticket: any){
   console.log(ticket);
   let sql = 'INSERT INTO ticketsPending( user_id , subject , status , priority, project_id ,  task_id,  channel_id , type_id , created_at ) VALUES(  ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  return this.database.executeSql(sql, [  1  , ticket.subject, 'open', ticket.priority, ticket.project_id , ticket.task_id ,1 , 2 , ticket.created_at ]);
+  return this.database.executeSql(sql, [  1  , ticket.subject, 'open', ticket.priority, ticket.project_id , ticket.task_id ,1 , 2 , ticket.created_at ]).catch((err)=>console.log("tables not droped", err));
 }
 
-createRegistro(registro: any){
-  console.log(registro);
-    this.http.post("http://10.10.1.108:81/apiservice/public/api/v1/registros", registro).subscribe( 
+createRegistro( registro: object , id : any){
+  console.log("despues sqlite" + registro);
+ // console.log("despues sqlite" + id);
+   this.http.post("http://10.10.1.108:81/apiservice/public/api/v1/tasks/" +id +"/registros", registro).subscribe( 
    response=>{ console.log( response);  });
      
   /*
@@ -255,7 +256,7 @@ if(ticketsPending.length > 0){
    for(let index2 = 0; index2 < ticketsPending.length; index2++){
   
   delete ticketsPending[index2].id;
-  this.http.post("http://10.10.1.108:81/apiservice/public/api/v1/tickets", ticketsPending[index2]).subscribe( 
+  this.http.post("http://10.10.1.136:81/apiservice/public/api/v1/tickets", ticketsPending[index2]).subscribe( 
    response=>{ console.log( response);}
    /*
 
