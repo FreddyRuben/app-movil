@@ -5,12 +5,6 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { SqliteProvider } from './../../providers/sqlite/sqlite';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
-/**
- * Generated class for the NuevoregistroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -25,6 +19,7 @@ Position = [];
 registro = {};
 latitude:string ;
 longitude:string ;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private geolocation: Geolocation, public sqliteService: SqliteProvider) {
  this.item = navParams.data.item;
@@ -44,6 +39,7 @@ myDate: String = new Date().toISOString();
       targetWidth: 800,
       targetHeight: 600
     }
+    console.log(options)
     
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI

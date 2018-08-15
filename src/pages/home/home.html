@@ -7,17 +7,18 @@
 <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
  <ion-refresher-content>
-
- 
     </ion-refresher-content>
-</ion-refresher>  
+</ion-refresher>
   <div style="padding:20px;">
   <ion-list>
     <ion-list-header>
         Lista de Proyectos
     </ion-list-header>
-    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    <!-- <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
       {{ item.project_name }}
+    </button> -->
+    <button ion-item *ngFor="let proyecto of proyectos" (click)="itemSelected(proyecto)">
+      {{proyecto.id}} - {{proyecto.project_name}}
     </button>
   </ion-list>
 </div>

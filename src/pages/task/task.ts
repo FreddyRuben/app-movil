@@ -2,12 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DetailPage } from '../detail/detail';
 import { Http, Headers} from '@angular/http';
-/**
- * Generated class for the TaskPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { SqliteProvider } from './../../providers/sqlite/sqlite';
+import { Proveedor1Provider } from '../../providers/proveedor1/proveedor1';
 
 @IonicPage()
 @Component({
@@ -16,27 +12,33 @@ import { Http, Headers} from '@angular/http';
 })
 export class TaskPage {
 
-  item;
- ProjectId;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+item;
+Project;
+ip;
+token ;
+public data:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public sqliteService: SqliteProvider, public proveedor: Proveedor1Provider) {
     
-  this.ProjectId = navParams.data.item;
-  let url = "http://10.10.1.136:81/apiservice/public/api/v1/projects/" + this.ProjectId.id + "/tasks";
-  this.http.get(url).subscribe(data => {
+this.Project = navParams.data.proyecto;
+
+this.ip = this.sqliteService.ip;
+this.token = this.sqliteService.token;
+
+
+let headers2 = new Headers();
+headers2.append('Accept','application/json');
+headers2.append('content-type','application/json');
+headers2.append('Authorization','Bearer '+this.token);
+  
+  let url = this.ip + "/tasks/" + this.Project.id;
+  this.http.get(url, {headers: headers2} ).subscribe(data => {
   this.item = data.json();
  
-  console.log(data.json());
+  // console.log(data.json());
     });
-  
-  
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TaskPage');
   }
 
   TaskSelected(item) {
-    //console.log("Selected Item", item);
 
     if (item.length > 0)  {
       this.navCtrl.push(TaskPage, { item: item });
@@ -44,6 +46,4 @@ export class TaskPage {
       this.navCtrl.push(DetailPage, { item: item });
     }
   }
-
-
 }

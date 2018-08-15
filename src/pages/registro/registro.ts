@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NuevoregistroPage } from '../nuevoregistro/nuevoregistro';
 import { RegistroDetallePage } from '../registro-detalle/registro-detalle';
-import { Http} from '@angular/http';
+import { Http, Headers} from '@angular/http';
+import {DomSanitizer} from '@angular/platform-browser';
+import { SqliteProvider } from './../../providers/sqlite/sqlite';
 /**
  * Generated class for the RegistroPage page.
  *
@@ -18,12 +20,20 @@ import { Http} from '@angular/http';
 export class RegistroPage {
 item;
 registros = [];
+ip;
+token ;
 
-  constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,public sqliteService: SqliteProvider, public http: Http, public navParams: NavParams, private _DomSanitizer: DomSanitizer) {
 this.item = navParams.data.item;
-let url = "http://10.10.1.136:81/apiservice/public/api/v1/tasks/" + this.item.id + /registros/;
-//let url2 = "http://10.10.1.108:81/apiservice/public/api/v1/registros/" + this.item.id + /imagenes/;
-  this.http.get(url).subscribe(data => {
+
+this.ip = this.sqliteService.ip;
+this.token = this.sqliteService.token;
+let url = this.ip + "tasks/" + this.item.id + /registros/;
+let headers2 = new Headers();
+headers2.append('Accept','application/json');
+headers2.append('content-type','application/json');
+headers2.append('Authorization','Bearer '+this.token);
+  this.http.get(url, {headers: headers2}).subscribe(data => {
    this.registros = data.json();
  
    console.log(data.json());

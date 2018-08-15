@@ -1,11 +1,11 @@
 .toolbar-background-md {
   
-    background: #00afef;
+    background:#4fa757;
     
 }
 
 .button-md {
-    background-color: #204c6f !important;
+    background-color: #285f20 !important;
 
     margin: auto ;
     width: 95%;
@@ -44,14 +44,14 @@ ion-app.md [padding] {
 //secciones
 .sec1{background-color:#50a0d2;    box-shadow: inset -3px 6px 16px 0.5px;
 }
-.sec2{background-color: #4875ab;}
+.sec2{background-color: #3f6f38;}
 .secPending{background-color: #b71818;}
 .sec3{background-color: #1f4e88;}
 .sec4{background-color: #11325a;}
 
-.gradient{background: #1e3147;
-    background: -webkit-linear-gradient(to bottom, #1e3147, #1e3c72);
-    background: linear-gradient(to bottom, #1e3147, #1e3c72);}
+.gradient{background: #3b7b37;
+    background: -webkit-linear-gradient(to bottom,  #3b7b37, #4fa75a);
+       background: linear-gradient(to bottom, #3b7b37, #4fa75a);}
 
  //texto
  .fontPrimaria{color:#fff !important;}   

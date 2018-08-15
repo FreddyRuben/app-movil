@@ -6,12 +6,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import { Network } from '@ionic-native/network';
-/*
-  Generated class for the SqliteProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class SqliteProvider {
 
@@ -22,28 +17,18 @@ private dbReady = new BehaviorSubject<boolean>(false);
 
 
 ticketsR = [];
+ip = "http://10.10.1.86/api/public/index.php/api";
+// ip = "http://198.50.116.250/worksuite/apinetwork/public/index.php/api/v1/";
+resToken;
+responseLocaltoRemote;
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjgsImlzcyI6Imh0dHA6Ly8xMC4xMC4xLjg2L2FwaTAxY29waWEvcHVibGljL2luZGV4LnBocC9hcGkvbG9naW4iLCJpYXQiOjE1MzM5NDEzNzIsImV4cCI6MTUzMzk0MTk3MiwibmJmIjoxNTMzOTQxMzcyLCJqdGkiOiJ6NGVaYzhQdWpvSUZJUnA1In0.-xjD8UOl4g9ZhFC2nUU_nfJw5XnO13iywBxmCGN41XQ";
+public online: boolean;
 
-
-  public online: boolean;
-//hasTicketsPendings = false;
-// 
 
   constructor(private platform:Platform, private sqlite:SQLite,private sqlitePorter: SQLitePorter, public http: Http, private network: Network) {
     this.platform.ready().then(()=>{
 
- //FUNCIONES PARA REVISAR CONEXION
 
-/*
-this.network.onDisconnect().subscribe(() => {
-   this.online = false;
-    console.log("Internet =" + this.online);
-});
-
-this.network.onConnect().subscribe(() => {
-    this.online = true;
-    console.log("Internet ="  + this.online);
-});*/
-//FUNCIONES PARA REVISAR CONEXION
 
 this.sqlite.create({ name: 'local.db', location: 'default'})
     .then((db:SQLiteObject)=>{ 
@@ -56,54 +41,80 @@ this.sqlite.create({ name: 'local.db', location: 'default'})
         });*/
 
       })
-let url = "http://10.10.1.136:81/apiservice/public/api/v1/tickets";
-let headers2 = new Headers();
-headers2.append('Accept','application/json');
-headers2.append('content-type','application/json');
 
-this.http.get(url, {headers: headers2}).subscribe(data => {
-this.ticketsR = data.json();
+    
+
+ });  }
+
+
+
+//FUNCIONES LOGIN
+
+login(username: string, password: string) :string{
+
+let url = this.ip + "/login";
+
+let result = "false";
+
+  let headers2 = new Headers();
+
+  headers2.append('Content-Type', 'application/json');
+  headers2.append('Access-Control-Allow-Origin' , '*');
+  headers2.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+  headers2.append('Content-Type','application/x-www-form-urlencoded');
+
+  let data = {
+    name: username,
+    password: password
+  };
+
+  this.http.post(url, JSON.stringify(data) , {headers: headers2})
+    .subscribe(data => {
+      // console.log(data);
+      this.resToken = data.json();
+      this.token = this.resToken.token;
+
+      let result = "true";
+      console.log(this.resToken.status);
+
+
+// if (this.resToken.status = "success"){
+// this.token = this.resToken.token;
+// console.log(this.token);
+//NEWCODE
+// let url = this.ip +  "tickets";
+// let headers2 = new Headers();
+// headers2.append('Accept','application/json');
+// headers2.append('content-type','application/json');
+// headers2.append('Authorization','Bearer '+this.token);
+// console.log(headers2);
+// return this.http.get(url, {headers: headers2}).subscribe(data => {
+// this.ticketsR = data.json();
 
 //console.log( "test" , data.json()); //debug
 
 
 
+
  
 // Sync process
-
- this.syncFULL();
+ 
+//  this.syncFULL();
 
 //sync process
-})
-    
+// })//NEWCODE
 
- });  }
+    //     }
+       
+       
+       
+    //  }, error => { console.log(error); })
 
-//...more stuff...
+  }, error => { console.log(error); let result = "false"; });
 
-/* unusefullCode
-
-  private isReady(){
-    return new Promise((resolve, reject) =>{
-      //if dbReady is true, resolve
-      if(this.dbReady.getValue()){
-        resolve();
-      }
-      //otherwise, wait to resolve until dbReady returns true
-      else{
-        this.dbReady.subscribe((ready)=>{
-          if(ready){ 
-            resolve(); 
-          }
-        });
-      }  
-    })
-  }
-
- 
-*/
-
-
+  return result;
+}
+       
 
 
 //FUNCIONES CRUD 
@@ -168,7 +179,11 @@ create(ticket: any){
 createRegistro( registro: object , id : any){
   console.log("despues sqlite" + registro);
  // console.log("despues sqlite" + id);
-   this.http.post("http://10.10.1.108:81/apiservice/public/api/v1/tasks/" +id +"/registros", registro).subscribe( 
+let headers2 = new Headers();
+headers2.append('Accept','application/json');
+headers2.append('content-type','application/json');
+headers2.append('Authorization','Bearer '+this.token);
+   this.http.post(this.ip + "tasks/" +id +"/registros", registro,{headers: headers2}).subscribe( 
    response=>{ console.log( response);  });
      
   /*
@@ -197,19 +212,20 @@ update(tickets: any){
 syncFULL(){
   console.log("Checking internet availabilty");
   if (this.network.type != "none"){  
-  console.log("Internet available Sync starting");
-  this.syncLocalToRemote();
-  this.deleteTicketsPending();
-let url = "http://10.10.1.108:81/apiservice/public/api/v1/tickets";
+console.log("Internet available Sync starting");
+this.syncLocalToRemote(); // hacer una promesa  en success delete pending
+//this.deleteTicketsPending()
+let url = this.ip + "tickets";
 let headers2 = new Headers();
+//revisar que este bien esto porque no funciona
 headers2.append('Accept','application/json');
 headers2.append('content-type','application/json');
-
+headers2.append('Authorization','Bearer '+this.token);
 this.http.get(url, {headers: headers2}).subscribe(data => {
 this.ticketsR = data.json();
 })
-
-  this.syncRemoteToLocal(this.ticketsR);
+// el sinc  con refresh
+this.syncRemoteToLocal(this.ticketsR);// este esta bien
   } else{console.log("No acces to internet");}
 }
 
@@ -256,18 +272,25 @@ if(ticketsPending.length > 0){
    for(let index2 = 0; index2 < ticketsPending.length; index2++){
   
   delete ticketsPending[index2].id;
-  this.http.post("http://10.10.1.136:81/apiservice/public/api/v1/tickets", ticketsPending[index2]).subscribe( 
-   response=>{ console.log( response);}
-   /*
 
-      suc => {
-      this.deleteTicketsPending(); 
-            console.log(suc);
-        },
-        err => {
-            console.log(err );
-        }
-*/
+let headers2 = new Headers();
+headers2.append('Accept','application/json');
+headers2.append('content-type','application/json');
+headers2.append('Authorization','Bearer '+this.token);
+console.log(headers2);
+console.log(this.token);
+console.log(ticketsPending[index2]);
+  this.http.post(this.ip + "tickets", ticketsPending[index2], {headers:headers2}).subscribe( 
+   data=>{ 
+   	this.responseLocaltoRemote = data.json();
+    console.log(data.json());
+   	if(this.responseLocaltoRemote.created == true){ this.deleteTicketsPending(); }else(console.log("Error on post local to remote" + this.responseLocaltoRemote))
+
+   },
+  error => {
+            console.log(error );
+   }
+  
         );
       }
   } else{ console.log("No hay tickets pendientes"); }

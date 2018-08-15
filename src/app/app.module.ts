@@ -12,8 +12,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 
-
-
 import { ProjectService } from '../services/projects.service';
 
 import { AboutPage } from '../pages/about/about';
@@ -40,6 +38,9 @@ import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { SqliteProvider } from '../providers/sqlite/sqlite';
+import { Proveedor1Provider } from '../providers/proveedor1/proveedor1';
+import { HttpClientModule } from '@angular/common/http';
+import { ProveedorusersProvider } from '../providers/proveedorusers/proveedorusers';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
     BrowserModule,
      HttpModule,
      ChartsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -100,10 +102,12 @@ import { SqliteProvider } from '../providers/sqlite/sqlite';
     SQLitePorter,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectService,
-     
+
     Geolocation,
-    
-    SqliteProvider
+
+    SqliteProvider,
+    Proveedor1Provider,
+    ProveedorusersProvider
   ]
 })
 export class AppModule {}
