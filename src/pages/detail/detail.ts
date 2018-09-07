@@ -16,9 +16,6 @@ import { Http} from '@angular/http';
 export class DetailPage {
   item;
 
-
- 
-
   constructor(public navCtrl: NavController,  public http: Http, public navParams: NavParams) {
 
   this.item = navParams.data.item;

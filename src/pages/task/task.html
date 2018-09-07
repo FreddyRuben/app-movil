@@ -17,6 +17,7 @@
             <ion-list *ngFor="let tarea of item" style="position:relative;">
            <button ion-item (click)="TaskSelected(tarea)">
           <!-- {{ item.heading}}  -->
+            <span id="loading">Cargando...</span>
             {{tarea.name_task}}
         </button>
        

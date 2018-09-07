@@ -5,12 +5,6 @@ import { RegistroDetallePage } from '../registro-detalle/registro-detalle';
 import { Http, Headers} from '@angular/http';
 import {DomSanitizer} from '@angular/platform-browser';
 import { SqliteProvider } from './../../providers/sqlite/sqlite';
-/**
- * Generated class for the RegistroPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,6 +14,7 @@ import { SqliteProvider } from './../../providers/sqlite/sqlite';
 export class RegistroPage {
 item;
 registros = [];
+
 ip;
 token ;
 
@@ -28,16 +23,22 @@ this.item = navParams.data.item;
 
 this.ip = this.sqliteService.ip;
 this.token = this.sqliteService.token;
-let url = this.ip + "tasks/" + this.item.id + /registros/;
+// let url = this.ip + "tasks/" + this.item.id + /registros/;
+let url = `http://198.50.116.250/apinetwork/public/index.php/api/foto/${this.item.id}`;
+// let url = `http://10.10.1.86/api/public/index.php/api/foto/`
 let headers2 = new Headers();
+
 headers2.append('Accept','application/json');
 headers2.append('content-type','application/json');
 headers2.append('Authorization','Bearer '+this.token);
   this.http.get(url, {headers: headers2}).subscribe(data => {
    this.registros = data.json();
  
+   console.log(this.item);
+   
    console.log(data.json());
     });
+    
 /*this.http.get(url2).subscribe(data => {
    this.Imagenes = data.json();
  
@@ -62,7 +63,6 @@ Open(page: string , registro: string, ){
              } 
     }
  }
-
 
 /*
  registroSelected( registro: string) {

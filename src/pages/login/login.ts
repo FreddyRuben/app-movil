@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { AlertController } from 'ionic-angular';
-import { Http, Headers, Response} from '@angular/http';
+import { Http, Headers} from '@angular/http';
 import { SqliteProvider } from './../../providers/sqlite/sqlite';
 import { ProveedorusersProvider } from '../../providers/proveedorusers/proveedorusers';
 import 'rxjs/add/operator/map';
@@ -19,7 +19,7 @@ usuario;
 password;
 token;
 resToken;
-ip = "http://10.10.1.86/api/public/index.php/api"
+ip;
 
 public data:any;
 
@@ -38,12 +38,11 @@ public data:any;
   }
 
   Ingresar(){
-    let url = this.sqliteService.login(this.usuario, this.password);
+    let url = this.sqliteService.login();
 
     ////////////////////
 
     let headers2 = new Headers();
-
     headers2.append('Content-Type', 'application/json');
     headers2.append('Access-Control-Allow-Origin' , '*');
     headers2.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
@@ -54,18 +53,21 @@ public data:any;
       password: this.password
     };
 
-    // console.log("Inicio de Login...");
+    //console.log("Inicio de Login...");
+
     this.http.post(url, JSON.stringify(data) , {headers: headers2})
-        .subscribe(
-          data => {
-        this.resToken = data.json();        
+        .subscribe(data => {
+        this.resToken = data.json();
         this.token = this.resToken.token;
-        // console.log(this.resToken.status);
-        // console.log(this.token);
+
+        //console.log(this.resToken.status);
+
+        //console.log(this.token);
+
         this.sqliteService.token = this.token;
         this.navCtrl.setRoot(TabsPage);
-    }, 
-    error => { console.log(error+" jeje");
+
+    }, error => { console.log(error);
       let alert1 = this.alertCtrl.create({
         title: "Login",
         subTitle: "Datos Invalidos !",

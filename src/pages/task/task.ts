@@ -30,7 +30,8 @@ headers2.append('Accept','application/json');
 headers2.append('content-type','application/json');
 headers2.append('Authorization','Bearer '+this.token);
   
-  let url = this.ip + "/tasks/" + this.Project.id;
+  // let url = this.ip + "/tasks/" + this.Project.id;
+  let url = this.ip + "/tasks/240";
   this.http.get(url, {headers: headers2} ).subscribe(data => {
   this.item = data.json();
  

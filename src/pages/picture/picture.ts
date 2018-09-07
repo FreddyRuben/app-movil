@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
 @IonicPage()

@@ -18,6 +18,7 @@ export class HomePage {
 items = [];
 ip;
 token;
+
 doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 
@@ -39,9 +40,6 @@ doRefresh(refresher) {
         }, 700);
      
    } 
-  
-
-
 
 getProjects(){
 this.ip = this.sqliteService.ip;
@@ -58,7 +56,7 @@ this.proyectos = data.json();
  
     console.log( "test"  + data.json());
     });
-    
+    document.getElementById('loading').style.display = 'none';
 }
 
 itemSelected(proyecto) {

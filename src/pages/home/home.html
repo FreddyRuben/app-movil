@@ -14,9 +14,7 @@
     <ion-list-header>
         Lista de Proyectos
     </ion-list-header>
-    <!-- <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-      {{ item.project_name }}
-    </button> -->
+    <span id="loading">Cargando...</span>
     <button ion-item *ngFor="let proyecto of proyectos" (click)="itemSelected(proyecto)">
       {{proyecto.id}} - {{proyecto.project_name}}
     </button>

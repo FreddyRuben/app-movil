@@ -5,6 +5,8 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { SqliteProvider } from './../../providers/sqlite/sqlite';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
+import { Http, Headers, RequestOptions} from '@angular/http';
+
 
 @IonicPage()
 @Component({
@@ -13,19 +15,19 @@ import { Slides } from 'ionic-angular';
 })
 export class NuevoregistroPage {
 item;
+project_id;
 Image = [];
-base64Image =[];
+base64Image = [];
 Position = [];
-registro = {};
+registro = [];
 latitude:string ;
 longitude:string ;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private geolocation: Geolocation, public sqliteService: SqliteProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private geolocation: Geolocation, public sqliteService: SqliteProvider, public http: Http) {
  this.item = navParams.data.item;
   }
 
-myDate: String = new Date().toISOString();
+// myDate: String = new Date().toISOString();
 
  takePicture(){
 
@@ -39,7 +41,6 @@ myDate: String = new Date().toISOString();
       targetWidth: 800,
       targetHeight: 600
     }
-    console.log(options)
     
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
@@ -78,10 +79,8 @@ myDate: String = new Date().toISOString();
   }
 
   registroSubmit(registro) {
-  this.registro['created_at'] = this.myDate;
-  this.registro['task_id'] = this.navParams.data.item.id;
-  this.registro['images'] = this.Image;
-  console.log( this.registro);
+    console.log('Este es el', registro);
+    
   let test2= [];
   test2.push(this.registro)
   console.log (test2[0]);
@@ -100,6 +99,14 @@ myDate: String = new Date().toISOString();
 */
 
   ionViewDidLoad() {
+    console.log('inicio LoginPage');
+    let data = {
+        name: 'paul rudd',
+        movies: [ 'I Love You Man', 'Role Models' ]
+    };
+    this.http.post('http://192.168.100.6/api/public/index.php/api/registros', data).subscribe((data) => {
+        console.log(data.json());
+    });
    
     console.log('ionViewDidLoad NuevoregistroPage');
   }
